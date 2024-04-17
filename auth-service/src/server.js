@@ -58,7 +58,7 @@ try {
   })
 
   // Register routes.
-  app.use('/', router)
+  app.use(baseURL, router)
 
   // Error handler.
   app.use((err, req, res, next) => {
