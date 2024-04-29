@@ -56,7 +56,11 @@ export class AccountController {
       const privateKey = await fs.readFile('./private.pem', 'utf8')
 
       const payload = {
-        username: userDocument.username
+        // username: userDocument.username
+        userID: userDocument.id
+        // This change assumes that userDocument.id contains the user's unique identifier, which is often a better choice for the payload in a JWT.
+        // Using the user ID (often a numeric or UUID value) is more stable, as usernames might change, but IDs generally do not.
+        // Additionally, using the ID can enhance privacy and security, as it avoids exposing the username in the token payload. Make sure that the rest of your system is capable of handling the user ID instead of the username wherever necessary.
       }
 
       // Create the access token with the shorter lifespan.
@@ -72,9 +76,8 @@ export class AccountController {
         sameSite: 'strict' // Adjust based on your requirements.
       })
 
-      res.status(201).json({ message: 'User login successful! AccessToken: ' + accessToken })
+      res.status(201).json({ message: 'User login successful! AccessToken:' + accessToken })
     } catch (error) {
-      console.log(error)
       // Authentication failed.
       const err = createError(401)
       err.cause = error
