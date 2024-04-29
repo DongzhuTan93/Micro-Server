@@ -1,0 +1,38 @@
+{
+  "name": "resource-service",
+  "version": "3.1.0",
+  "description": "The Resource Service is a RESTful API responsible for managing resources in the system.",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js",
+    "dev": "nodemon --inspect=9229 -r dotenv/config src/server.js",
+    "lint": "npx eslint ./src || exit 0",
+    "lint:fix": "npx eslint ./src --fix || exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.lnu.se:1dv026/student/dt222ha/assignment-b3-picture-it/resource-service.git"
+  },
+  "keywords": [],
+  "author": "Dongzhu Tan <dt222ha@student.se>",
+  "license": "MIT",
+  "dependencies": {
+    "@lnu/json-js-cycle": "^2.0.5",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "express-http-context": "^1.2.4",
+    "helmet": "^7.1.0",
+    "http-errors": "^2.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.1",
+    "morgan": "^1.10.0",
+    "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "@lnu/eslint-config": "^1.1.10",
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.0"
+  }
+}
