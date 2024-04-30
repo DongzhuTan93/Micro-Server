@@ -21,7 +21,7 @@ export class ResourceController {
    * @param {string} id - The value of the id for the image to load.
    * @returns {void} -Sends an HTTP response with status information but does not return a value explicitly.
    */
-  async loadImageDocument(req, res, next, id) {
+  async loadImageDocument (req, res, next, id) {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       const error = new Error('Invalid Identifier')
       error.status = 404
@@ -55,7 +55,7 @@ export class ResourceController {
    * @param {Function} next - Express next middleware function.
    * @returns {void} -Sends an HTTP response with status information but does not return a value explicitly.
    */
-  async showAllImagesFromUser(req, res, next) {
+  async showAllImagesFromUser (req, res, next) {
     try {
       // Assuming each image document has a 'userId' field that matches 'req.user.id'.
       const userImages = await ImageModel.find({ userId: req.user.userID })
@@ -85,7 +85,7 @@ export class ResourceController {
    * @param {Function} next - Express next middleware function.
    * @returns {void} -Sends an HTTP response with status information but does not return a value explicitly.
    */
-  async createImage(req, res, next) {
+  async createImage (req, res, next) {
     if (!req.body.data && !req.body.contentType && !req.body.location && !req.body.description) {
       const error = new Error('The request cannot or will not be processed due to client error (for example, validation error).')
       error.status = 400
@@ -142,7 +142,7 @@ export class ResourceController {
    * @param {Function} next - Express next middleware function.
    * @returns {void} -Sends an HTTP response with status information but does not return a value explicitly.
    */
-  async showImageWithId(req, res, next) {
+  async showImageWithId (req, res, next) {
     try {
       // Using 'imageId' field to find the document.
       const image = await ImageModel.findOne({
@@ -151,7 +151,7 @@ export class ResourceController {
       })
 
       if (!image) {
-        // If the image document is not found, return a 404 Not Found response.
+      // If the image document is not found, return a 404 Not Found response.
         const error = new Error('The requested resource was not found or you do not have permission to update it.')
         error.status = 404
         return next(error)
@@ -172,7 +172,7 @@ export class ResourceController {
    * @param {Function} next - Express next middleware function.
    * @returns {void} -Sends an HTTP response with status information but does not return a value explicitly.
    */
-  async updateTheWholeImage(req, res, next) {
+  async updateTheWholeImage (req, res, next) {
     if (!req.body.data && !req.body.contentType && !req.body.location && !req.body.description) {
       const error = new Error('The request cannot or will not be processed due to client error (for example, validation error).')
       error.status = 400
@@ -187,7 +187,7 @@ export class ResourceController {
       })
 
       if (!updateImage) {
-        // If the image is not found or the userId does not match, return a 404 error.
+      // If the image is not found or the userId does not match, return a 404 error.
         const error = new Error('The requested resource was not found or you do not have permission to update it.')
         error.status = 404
         return next(error)
@@ -238,7 +238,7 @@ export class ResourceController {
    * @param {Function} next - Express next middleware function.
    * @returns {void} -Sends an HTTP response with status information but does not return a value explicitly.
    */
-  async partialUpdateOneImage(req, res, next) {
+  async partialUpdateOneImage (req, res, next) {
     try {
       // Check if at least one field is provided for update.
       const fieldsToUpdate = ['data', 'contentType', 'description', 'location']
@@ -299,7 +299,7 @@ export class ResourceController {
    * @param {Function} next - Express next middleware function.
    * @returns {void} -Sends an HTTP response with status information but does not return a value explicitly.
    */
-  async deleteOneImage(req, res, next) {
+  async deleteOneImage (req, res, next) {
     try {
       const imageDocument = await ImageModel.findOne({
         imageId: req.params.imageId,
