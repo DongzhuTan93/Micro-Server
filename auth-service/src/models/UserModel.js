@@ -69,7 +69,6 @@ schema.virtual('id').get(function () {
 
 // Salts and hashes password before save.
 schema.pre('save', async function () {
-  console.log('>>>' + this.password + '<<<')
   this.password = await bcrypt.hash(this.password, 10)
 })
 
@@ -82,12 +81,6 @@ schema.pre('save', async function () {
  */
 schema.statics.authenticate = async function (username, password) {
   const userDocument = await this.findOne({ username })
-  console.log('>>>' + password + '<<<')
-
-  console.log('Userdocument at schema.statics.authenticate :' + userDocument)
-  console.log('Users password at schema.statics.authenticate :' + password)
-
-  console.log('true if the passwords match, false if they don not match: ' + await bcrypt.compare(password, userDocument?.password))
 
   // If no user found or password is wrong, throw an error.
   if (!userDocument || !(await bcrypt.compare(password, userDocument.password))) {
