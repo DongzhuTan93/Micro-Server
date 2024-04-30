@@ -48,7 +48,7 @@ export class ResourceController {
   }
 
   /**
-   * Displays a list of images.
+   * Displays a list of all images.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
